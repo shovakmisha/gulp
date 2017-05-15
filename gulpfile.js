@@ -25,17 +25,17 @@ gulp.task('scripts', function () {
         './app/magnific-popup/dist/dist/jquery.magnific-popup.min.js'
     ])
     .pipe(concat('libs.min.js'))
-    .pipe(uglify())
+    .pipe(uglify()) // сжати ці js файли
     .pipe(gulp.dest('./app/js'));
 });
 
 gulp.task('css-libs', ['sass'], function () {
     return gulp.src('./app/css/lib.css')
-        .pipe(cssnano())
-        .pipe(rename({suffix: '.min'}))
+        .pipe(cssnano()) // сжати css файл
+        .pipe(rename({suffix: '.min'})) // додати суфікс min
         .pipe(gulp.dest('./app/css'));
 });
-
+// ф-ція буде відтворювати зміни без перезагрузки сторінки
 gulp.task('browser-sync', function () {
    browserSync({
        server: {
@@ -43,6 +43,7 @@ gulp.task('browser-sync', function () {
        }
    });
 });
+// коли зміни будуть переноситьсь в продакшн (папка dist), папка dist буде видалятись перед переносом
 gulp.task('clean', function () {
    return del.sync('dist');
 });
@@ -50,6 +51,7 @@ gulp.task('clean', function () {
 gulp.task('clear', function () {
     return cache.clearAll();
 });
+// закешувати картинки
 gulp.task('img', function () {
    return gulp.src('app/img/**/*')
        .pipe(cache( imagemin({
@@ -72,11 +74,11 @@ gulp.task('build', ['clean', 'img', 'sass', 'scripts'], function () {
            'app/css/main.css',
            'app/css/lib.min.css'
        ])
-   .pipe(gulp.dest('dist/css'))
+   .pipe(gulp.dest('dist/css'));
     var buildFonts = gulp.src('app/fonts/**/*')
-        .pipe(gulp.dest('dist/fonts'))
+        .pipe(gulp.dest('dist/fonts'));
     var buildJs = gulp.src('app/js/**/*')
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest('dist/js'));
     var buildHtml = gulp.src('app/*.html')
         .pipe(gulp.dest('dist'));
 });

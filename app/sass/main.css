@@ -2,7 +2,9 @@ body {
   background-color: #c1c1c1;
   color: #444;
   font-family: sans-serif;
-  display: flex; }
+  display: flex;
+  color: white;
+  color: blue; }
 
 button {
   background: yellow;
